@@ -1,7 +1,6 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-
 class Netflix{}
 class User{
 - username
@@ -41,14 +40,14 @@ class Season extends Series{
 }
 
 class TextUI{
-String displayMsg()
+-Scanner sacn
++ void String displayMsg(String s)
 }
 class FileIO{
 void dataReader()
 }
 
 Netflix *-- User
-User <|--MyList
 Netflix *-- Media
 Media <|-- Film
 Media <|-- Series
