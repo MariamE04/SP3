@@ -15,12 +15,17 @@ class User{
  }
 
 abstract class Media{
+-String titel
 -double rating
 -int releaseDate
- -String titel
  +ArrayList Categories
  +Media(Titel, releaseDate, Categories, Rating)
  + void play()
+ +getName()
+ +getRating()
+ +getRealseYear()
+ +getCategory()
+ +equals()
 
 }
 class Film{
@@ -36,11 +41,17 @@ class Season extends Series{
 -int seasonNumber;
 -private ArrayList<String> episodes
 +season(int seasonNumber)
-+getSeasonNumber
+-getSeasonNumber()
 +addEpisodes(String episodeTitle)
 +toString
 }
 
+class Episode{
+-int episodeNumber
+getepisodeNumber()
+
+}
+package "util"{
 class TextUI{
 -static ArrayList<User> users
 -static User currentUser = null;
@@ -51,7 +62,11 @@ class TextUI{
 -static void loginUser()
 }
 class FileIO{
-void dataReader()
+FileReader()
++List<String> readUserData(String path)
++void saveData(List<User> users,String path)
++String[] readBoardData(String path, int length)
+    }
 }
 
 Netflix *-- User
@@ -59,6 +74,7 @@ Netflix *-- Media
 Media <|-- Film
 Media <|-- Series
 Series <|-- Season
+Season <|-- Episode
 Netflix *-- FileIO
 Netflix *-- TextUI
 @enduml
