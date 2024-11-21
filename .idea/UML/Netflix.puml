@@ -43,7 +43,7 @@ class Season extends Series{
 +season(int seasonNumber)
 -getSeasonNumber()
 +addEpisodes(String episodeTitle)
-+toString
++toString()
 }
 
 class Episode{
