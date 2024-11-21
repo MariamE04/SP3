@@ -1,7 +1,9 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-class Netflix{}
+class Netflix{
+main
+}
 class User{
 - username
 - password
@@ -13,7 +15,7 @@ class User{
  }
 
 abstract class Media{
--int rating
+-double rating
 -int releaseDate
  -String titel
  +ArrayList Categories
@@ -40,8 +42,13 @@ class Season extends Series{
 }
 
 class TextUI{
+-static ArrayList<User> users
+-static User currentUser = null;
 -Scanner sacn
 + void String displayMsg(String s)
++void startMenu()
+-static void CreatUser()
+-static void loginUser()
 }
 class FileIO{
 void dataReader()
