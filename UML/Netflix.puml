@@ -3,6 +3,9 @@
 
 class Netflix{
 main
+setup()
+-static ArrayList<User> users
+-static ArrayList<Media> ...
 }
 class User{
 - username
@@ -35,7 +38,7 @@ class Series {
 + ArrayList<int>
 -int season
 -int episode
-+Series(titel, releaseDate, Categories, Rating, season, episode)
++Series(titel, releaseDate, Categories, Rating, season)
 }
 class Season extends Series{
 -int seasonNumber;
@@ -46,24 +49,18 @@ class Season extends Series{
 +toString()
 }
 
-class Episode{
--int episodeNumber
-getepisodeNumber()
 
-}
 package "util"{
 class TextUI{
--static ArrayList<User> users
--static User currentUser = null;
--Scanner sacn
-+ void String displayMsg(String s)
-+void startMenu()
--static void CreatUser()
--static void loginUser()
+-Scanner scan
++ int promptNumeric(String msg)
++ String promptText(String msg)
++ int promptChoice(String msg, ArrayList<String> list)
++ boolean promptBinary(String msg )
 }
 class FileIO{
 FileReader()
-+List<String> readUserData(String path)
++List<Media> readUserData(String path)
 +void saveData(List<User> users,String path)
 +String[] readBoardData(String path, int length)
     }
