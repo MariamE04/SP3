@@ -14,4 +14,9 @@ public class Series extends Media{
         this.season = season;
         this.episode = episode;
     }
+
+    public ArrayList<String> getCategories() {
+        return categories;
+    }
+
 }

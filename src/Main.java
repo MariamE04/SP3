@@ -7,7 +7,7 @@ public class Main {
         System.out.println("Movies List:");
         // Print out movie details to verify data
         for (Movies movie : moviesList) {
-            System.out.println(movie.getTitel() + " (" + movie.getReleaseDate() + ") - Rating: " + movie.getRating());
+            System.out.println(movie.getTitel() + movie.getCategories() +" (" + movie.getReleaseDate() + ") - Rating: " + movie.getRating());
         }
     }
 }
