@@ -1,61 +1,40 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class FileIO {
-    public static ArrayList<String> readFilmData(String path) {
-        ArrayList<String> data = new ArrayList();
-        File file = new File(path);
-        try {
-            Scanner scan = new Scanner(file);
-            scan.nextLine();//skip header
 
-            while (scan.hasNextLine()) {
-                String line = scan.nextLine(); // "tess, 40000"
-                data.add(line);
+    ArrayList<Media> movies = new ArrayList<>(); //A list to store Media objects representing movies.
+
+    ArrayList<Media> series = new ArrayList<>(); //A list to store Media objects representing TV series
+
+    public static ArrayList<media> readData() {
+        try {
+            Scanner scan = new Scanner(new File("film.txt"));
+            while (scan.hasNextLine()) {          //Reads each line in
+                String line = scan.nextLine();  // the file until the end.
+                String[] lineData = line.split(";"); //Splits each line into an array of strings based on the semicolon.
+
+                String movieName = lineData[0].trim(); //Movie name: lineData[0] (e.g., "The Godfather").
+                String movieYear = lineData[1].trim(); //Release year: lineData[1] (e.g., "1972").
+
+                ArrayList<String> MovieCategory = new ArrayList<>();
+                String[] categoryArray = lineData[2].split(","); //Splits lineData[2] into individual categories
+                for (int i = 0; i < categoryArray.length; i++) {
+                    MovieCategory.add(categoryArray[i]); // Adds each category (except the last) to MovieCategory
+                }
+                String number = lineData[3].trim();
+                number = number.replace(',', '.'); //replaces , with ., and converts it to a double
+                double movieRating = Double.parseDouble(number);
+
+                Movies movie = new Movies(movieName, movieYear, movieRating); //Constructs a Movies object using the name, year, and rating.
+                movies.add(movie); //Adds the Movies object to the movies list.
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("File was not found");
+        } catch(FileNotFoundException e){
+            System.out.println(e + "Option do not exist.Try again");
         }
-        return data;
+        return movies;
     }
 
-    public static void saveData(List<String> items, String path, String header) {
-        try {
-            FileWriter writer = new FileWriter(path);
-            writer.write(header + "\n"); //Giv csv filen en header
-            for (String s : items) {
-                writer.write(s + "\n"); //"Tess, 40000";
-            }
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("something went wrong when writing to file");
-        }
-    }
-
-    public String[] readBoardData(String path, int length) {
-        String[] data = new String[length];
-        File file = new File(path);
-        int counter = 0;
-
-        try {
-            Scanner scan = new Scanner(file);
-            scan.nextLine();
-
-            while (scan.hasNextLine()) {
-                String line = scan.nextLine();
-                data[counter] = line;
-                counter++;
-            }
-
-        } catch (FileNotFoundException e) {
-            System.out.println("File was not found");
-        }
-        return data;
-
-    }
 }
