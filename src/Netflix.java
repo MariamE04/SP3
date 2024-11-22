@@ -1,11 +1,14 @@
 import java.util.ArrayList;
+import java.util.List;
 
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Netflix {
     private List<User> users;
-
+    private TextUI ui;
+    private FileIO io;
+    private String DataPath;;
 
     private ArrayList<Movies> moviesList;
     private ArrayList<Series> seriesList;
@@ -14,6 +17,7 @@ public class Netflix {
         this.moviesList = new ArrayList<>();
         this.seriesList = new ArrayList<>();
     }
+
 
     FileIO fileIO = new FileIO();
     moviesList = fileIO.readMovieData();
