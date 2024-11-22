@@ -6,29 +6,21 @@ import java.util.List;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Netflix {
     private List<User> users;
-    private TextUI ui;
+    private TextUI ui = new TextUI();
     private FileIO io;
-    private String DataPath;;
-
     private ArrayList<Movies> moviesList;
     private ArrayList<Series> seriesList;
 
     public Netflix() {
-        this.moviesList = new ArrayList<>();
-        this.seriesList = new ArrayList<>();
+        this.io = new FileIO(); // Create an instance of FileIO
+        this.users = new ArrayList<>();
+        this.moviesList = io.readMovieData(); // Use instance method
+        this.seriesList = io.readSeries(); // Use instance method
     }
 
-
-    FileIO fileIO = new FileIO();
-    moviesList = fileIO.readMovieData();
-    seriesList = fileIO.readSeries();
-
-//Test, 100 skal være længden af alle movies i tekstfilen
-void moviesAddList() {
-    for (int i = 0; i < 100; i++) {
-        moviesList.add(i, new Movies(io.readData));
+    public void moviesAddList() {
+        for (int i = 0; i < moviesList.size(); i++) {
+            System.out.println(moviesList.get(i)); // Example logic
+        }
     }
-}
-
-
 }

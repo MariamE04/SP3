@@ -5,12 +5,12 @@ import java.util.Scanner;
 
 public class FileIO {
 
-    private static ArrayList<Movies> moviesList = new ArrayList<>(); //A list to store Media objects representing movies.
+    private  ArrayList<Movies> moviesList = new ArrayList<>(); //A list to store Media objects representing movies.
 
-    private static ArrayList<Series> seriesList = new ArrayList<>(); //A list to store Media objects representing TV series
+    private  ArrayList<Series> seriesList = new ArrayList<>(); //A list to store Media objects representing TV series
 
-    public static ArrayList<Movies> readMovieData() {
-        try (Scanner scan = new Scanner(new File("film.txt"))){
+    public  ArrayList<Movies> readMovieData() {
+        try (Scanner scan = new Scanner(new File("Data/film.txt"))){
             while (scan.hasNextLine()) {          //Reads each line in
                 String line = scan.nextLine();  // the file until the end.
                 String[] lineData = line.split(";"); //Splits each line into an array of strings based on the semicolon.
@@ -35,8 +35,8 @@ public class FileIO {
         return moviesList;
     }
 
-    public static ArrayList<Series> readSeries() {
-        try( Scanner scan = new Scanner(new File("serier.txt"));) {
+    public  ArrayList<Series> readSeries() {
+        try( Scanner scan = new Scanner(new File("Data/serier.txt"));) {
             while(scan.hasNextLine()){
                 String line = scan.nextLine();
                 String[] lineData = line.split(";");
