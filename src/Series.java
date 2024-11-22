@@ -17,10 +17,4 @@ public class Series extends Media{
         //       seasonList.add(season);
         //       episodeList.add(episode);
     }
-
-
-
-
-
-
 }

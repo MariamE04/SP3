@@ -11,7 +11,6 @@ public abstract class Media {
         this.releaseDate = releaseDate;
         this.categories = categories;
         this.rating = rating;
-
     }
 
     void play() {
