@@ -56,7 +56,7 @@ public class FileIO {
                 for (String season : seasonsData) {
                     episodesPerSeason.add(season.trim());
                 }
-                Series series = new Series(seriesName, seriesYears, seriesRating, episodesPerSeason);
+                Series series = new Series(seriesName, seriesYears, seriesCategories, seriesRating, episodesPerSeason);
                 seriesList.add(series); // Populate the existing list
             }
         } catch (FileNotFoundException e) {

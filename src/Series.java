@@ -9,12 +9,9 @@ public class Series extends Media{
     // ArrayList<Integer> episodeList;
 
 
-    Series(String titel, int releaseDate, ArrayList<Media> categories, double rating, int season, int episode){
+    Series(String titel, int releaseDate, ArrayList<String> categories, double rating, ArrayList<String> episodesPerSeason) {
         super(titel, releaseDate, categories, rating);
         this.season = season;
         this.episode = episode;
-
-        //       seasonList.add(season);
-        //       episodeList.add(episode);
     }
 }
