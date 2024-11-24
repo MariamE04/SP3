@@ -25,7 +25,7 @@ public class TextUI {
 
         System.out.println("Please enter your password");
         String password = scan.nextLine();
-        if(userHandler.login(password,username)){
+        if(userHandler.login(username,password)){
             System.out.println("Welcome to Chills " + username);
             System.out.println("\n\n");
         } else {
@@ -43,6 +43,7 @@ public class TextUI {
                     passwordAttempts++;
                 } if(passwordAttempts == 4) {
                     System.out.println("Maximum login attempts have been reached. Shutting down...");
+                    break;
                 }
             }
         }
@@ -53,9 +54,10 @@ public class TextUI {
         System.out.println("Please Creat a username");
         String username = scan.nextLine();
         System.out.println("Please create a password (it should be between 5 and 9 characters)");
-        String password = scan.next();
+        String password = scan.nextLine();
 
         if(userHandler.createUser(fullname, username, password)){
+            userHandler.saveUsers();
             System.out.println("Welcome to Chills  " + username);
             System.out.println("\n\n");
         } else{
@@ -74,6 +76,7 @@ public class TextUI {
         System.out.println("3-watched movies");
         System.out.println("4-saved movies");
         int input = scan.nextInt();
+        scan.nextLine();
         if (input == 1) {
             System.out.println("You choose movies, here's some options");
             for (int i = 0; i < medias.size(); i++) {
@@ -84,7 +87,13 @@ public class TextUI {
             youHaveChosenMovie();
 
         } else if (input == 2) {
-            System.out.println("You choose series, here's some options");
+            System.out.println("You chose series, here's some options:");
+            for (int i = 0; i < medias.size(); i++) {
+                System.out.println((i + 1) + ": " + medias.get(i).getTitel());
+            }
+            chooseSeries();
+            youHaveChosenSeries();
+
         } else if (input == 3) {
             System.out.println("You choose your watched list: ");
         }  else if (input == 4) {
@@ -93,18 +102,25 @@ public class TextUI {
     }
 
     public void chooseMovie() {
-        try (Scanner cs = new Scanner(System.in);) {
-            System.out.println("\n\n");
-            System.out.println("Please press the number of the movie you want to watch");
-            int movieNumberToWatch = cs.nextInt();
-            System.out.println("you have chosen " + choseResults(movieNumberToWatch));
+        System.out.println("\n\n");
+        System.out.println("Please press the number of the movie you want to watch");
+
+        try {
+            int movieNumberToWatch = scan.nextInt(); // Brug den eksisterende Scanner
+            System.out.println("You have chosen: " + choseResults(movieNumberToWatch));
+
+            System.out.println("What would you like to do?");
+            System.out.println("1: Play the movie");
+            System.out.println("2: Save the movie to your list");
+            System.out.println("Enter your choice: ");
+
+            int option = scan.nextInt();
+            movieOption(option);
+
         } catch (Exception e) {
-            System.out.println("you cannot write letters, write only number, you can try again now   ");
-            Scanner cs = new Scanner(System.in);
-            System.out.println("\n\n");
-            System.out.println("Please press the number of the movie you want to watch");
-            int movieNumberToWatch = cs.nextInt();
-            System.out.println("you have chosen " + choseResults(movieNumberToWatch));
+            System.out.println("You cannot write letters, write only numbers. You can try again now.");
+            scan.nextLine(); // Ryd input-bufferen
+            chooseMovie(); // Kald metoden igen for at prøve igen
         }
     }
         public String choseResults ( int movieNumberToWatch){
@@ -113,13 +129,14 @@ public class TextUI {
         }
 
     public void youHaveChosenMovie() {
-        Scanner scanner = new Scanner(System.in); // Ensure Scanner is properly set up
         System.out.print("Enter your choice: ");
-        if (scanner.hasNextInt()) {
-            int choice = scanner.nextInt();
+        if (scan.hasNextInt()) { // Brug samme Scanner
+            int choice = scan.nextInt();
             System.out.println("You selected: " + choice);
         } else {
             System.out.println("Invalid input. Please enter a valid number.");
+            scan.nextLine(); // Ryd input-bufferen
+            youHaveChosenMovie(); // Kald metoden igen
         }
     }
 
@@ -145,4 +162,60 @@ public class TextUI {
             System.out.println("Option does not exist, please choose the available options ");
             }
         }
+
+    public void chooseSeries() {
+        System.out.println("\n\n");
+        System.out.println("Please press the number of the series you want to watch");
+
+        try {
+            int seriesNumberToWatch = scan.nextInt();
+            System.out.println("You have chosen: " + choseResults(seriesNumberToWatch));
+
+            // Tilføj mulighed for at vælge, hvad man vil gøre med serien
+            System.out.println("What would you like to do?");
+            System.out.println("1: Play the series");
+            System.out.println("2: Save the series to your list");
+            System.out.println("Enter your choice: ");
+
+            int option = scan.nextInt();
+            seriesOption(option); // Kalder metoden her
+
+        } catch (Exception e) {
+            System.out.println("You cannot write letters, write only numbers. You can try again now.");
+            scan.nextLine(); // Ryd input-bufferen
+            chooseSeries(); // Prøv igen
+        }
+    }
+
+    public void seriesOption(int input) {
+        Scanner scanner = new Scanner(System.in);
+        if (input == 1) {
+            System.out.println("The series is now playing.");
+        } else if (input == 2) {
+            System.out.println("Enter the name of the series you want to save: ");
+            String seriesName = scanner.nextLine();
+            try (FileWriter csvWriter = new FileWriter("data/SavedSeriesList.csv", true)) {
+                csvWriter.append(seriesName).append("\n");
+                System.out.println("The series has been added to your list.");
+            } catch (IOException e) {
+                System.out.println("Error saving series: " + e.getMessage());
+            }
+        }
+    }
+
+    public void youHaveChosenSeries() {
+        System.out.print("Enter your choice: ");
+        if (scan.hasNextInt()) { // Brug samme Scanner
+            int choice = scan.nextInt();
+            System.out.println("You selected: " + choice);
+        } else {
+            System.out.println("Invalid input. Please enter a valid number.");
+            scan.nextLine(); // Ryd input-bufferen
+            youHaveChosenMovie(); // Kald metoden igen
+        }
+    }
+            public String choseSeriesResults (int seriesNumberToWatch){
+                ArrayList<Media> wannaWatchSeries = MovieAndSeriesLab.series;
+                return wannaWatchSeries.get(seriesNumberToWatch).getTitel();
+            }
     }

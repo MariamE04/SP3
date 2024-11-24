@@ -54,7 +54,7 @@ public class UserHandler {
                 String input = scanner.nextLine();
                 String[] values = input.split(","); //Splits each line into parts (comma-separated values).
                 users.add(new User(values[0], values[1], values[2])); //Creates a new User object for each line and adds it to the users list.
-                }
+            }
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found: Unable to load users."); //Prints an error message if the file is not found.
@@ -65,7 +65,7 @@ public class UserHandler {
             for (User users : users){ //Iterates over the users list and writes each user's data to the file
                 writer.write(users.getFullName() +"," +users.getUsername() +","+ users.getPassword()+ "\n");
                 //Each user is saved in the format: fullName,username,password.
-            writer.close();
+                writer.close();
             }
         } catch (IOException e) {
             System.out.println("system is not working currently ");

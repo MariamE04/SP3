@@ -17,7 +17,6 @@ public class Netflix {
         ui = new TextUI(userHandler);
         this.io = new FileIO(); // Create an instance of FileIO
         this.users = new ArrayList<>();
-
         this.UserDataPath = "data/Userdata.csv";
     }
 

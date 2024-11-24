@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.io.FileWriter;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,7 +13,6 @@ public class Main {
                 break;
             case "2":
                 textUI.CreatAUser();
-
                 break;
             default:
                 System.out.println("Goodbye");
@@ -21,8 +20,13 @@ public class Main {
         userHandler.saveUsers();
         //Here we call the method to read the movie data so the user can pick the specific media they want.
         FileIO fileIO = new FileIO();
+
         MovieAndSeriesLab.movies = fileIO.readMovieData();
         TextUI text = new TextUI(userHandler);
         text.pickMedia(MovieAndSeriesLab.movies);
+
+        MovieAndSeriesLab.series = fileIO.readSeries();
+        TextUI text2 = new TextUI(userHandler);
+        text.pickMedia(MovieAndSeriesLab.series);
     }
 }
