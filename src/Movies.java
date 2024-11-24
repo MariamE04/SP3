@@ -9,7 +9,17 @@ public class Movies extends Media {
         return categories;
     }
 
-    public String getName() {
-        return titel;
+    @Override
+    String getTitel(){
+        return this.titel;
     }
+    @Override
+    int getReleaseDate(){
+        return this.releaseDate;
+    }
+    @Override
+    ArrayList<String> getCategory(){
+        return this.categories;
+    }
+
 }

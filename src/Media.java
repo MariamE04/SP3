@@ -33,5 +33,4 @@ public abstract class Media {
         return this.categories;
     }
 
-
 }

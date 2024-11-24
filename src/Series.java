@@ -1,10 +1,8 @@
 import java.util.ArrayList;
 
 public class Series extends Media{
-
     int season;
-    // ArrayList<Integer> seasonList;
-
+    //ArrayList<Integer> seasonList;
     int episode;
     // ArrayList<Integer> episodeList;
 
@@ -15,8 +13,24 @@ public class Series extends Media{
         this.episode = episode;
     }
 
-    public ArrayList<String> getCategories() {
-        return categories;
+    @Override
+    String getTitel(){
+        return this.titel;
+    }
+
+    @Override
+    int getReleaseDate(){
+        return this.releaseDate;
+    }
+
+    @Override
+    ArrayList<String> getCategory(){
+        return this.categories;
+    }
+
+    @Override
+    double getRating(){
+        return this.rating;
     }
 
 }

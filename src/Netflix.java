@@ -21,7 +21,7 @@ public class Netflix {
 
     public void printMovies() {
         for (Movies movie : moviesList) {
-            System.out.println("Movie: " + movie.getName());
+            System.out.println("Movie: " + movie.getTitel());
             System.out.println("Categories:");
             for (String category : movie.getCategories()) {
                 System.out.println(" - " + category);
