@@ -123,10 +123,10 @@ public class TextUI {
             chooseMovie(); // Kald metoden igen for at prøve igen
         }
     }
-        public String choseResults ( int movieNumberToWatch){
-            ArrayList<Media> wannaWatch = MovieAndSeriesLab.movies;
-            return wannaWatch.get(movieNumberToWatch).getTitel();
-        }
+    public String choseResults ( int movieNumberToWatch){
+        ArrayList<Media> wannaWatch = MovieAndSeriesLab.movies;
+        return wannaWatch.get(movieNumberToWatch).getTitel();
+    }
 
     public void youHaveChosenMovie() {
         System.out.print("Enter your choice: ");
@@ -160,8 +160,8 @@ public class TextUI {
             }
         }else {
             System.out.println("Option does not exist, please choose the available options ");
-            }
         }
+    }
 
     public void chooseSeries() {
         System.out.println("\n\n");
@@ -208,14 +208,15 @@ public class TextUI {
         if (scan.hasNextInt()) { // Brug samme Scanner
             int choice = scan.nextInt();
             System.out.println("You selected: " + choice);
+            scan.nextLine();
         } else {
             System.out.println("Invalid input. Please enter a valid number.");
             scan.nextLine(); // Ryd input-bufferen
             youHaveChosenMovie(); // Kald metoden igen
         }
     }
-            public String choseSeriesResults (int seriesNumberToWatch){
-                ArrayList<Media> wannaWatchSeries = MovieAndSeriesLab.series;
-                return wannaWatchSeries.get(seriesNumberToWatch).getTitel();
-            }
+    public String choseSeriesResults (int seriesNumberToWatch){
+        ArrayList<Media> wannaWatchSeries = MovieAndSeriesLab.series;
+        return wannaWatchSeries.get(seriesNumberToWatch).getTitel();
     }
+}

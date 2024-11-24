@@ -16,7 +16,7 @@ public class UserHandler {
 
     public boolean login(String username, String password) {
         for (User user : users) { //Iterates through the users list.
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)){ //Checks if a user with the given username and password exists.
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) { //Checks if a user with the given username and password exists.
                 return true; //Returns true if a match is found, otherwise returns false
             }
         }
@@ -25,7 +25,7 @@ public class UserHandler {
 
     public boolean createUser(String fullName, String username, String password) {
         boolean usernameTaken = false;
-        if(!ValidPassword(password)){ //Validates the password using the isPasswordValid method.
+        if (!ValidPassword(password)) { //Validates the password using the isPasswordValid method.
             return false; //If the password is invalid, returns false.
         }
         for (User users : users) {
@@ -38,13 +38,12 @@ public class UserHandler {
     }
 
     public boolean ValidPassword(String password) {
-        //Checks if the password: is null, Has fewer than 6 characters, Exceeds 10 characters.
-        if (password == null || password.length() <= 5 || password.length() > 10) {
-            System.out.println("the password is not meeting conditons "); //Prints a message if the password is invalid + returns false.
+        if(password == null || password.length() <= 5 || password.length() >20){
+            System.out.println("the password is not meeting conditons ");
             return false;
-        } else {
-
-            return true; //Returns true for valid passwords
+        }
+        else{
+            return true ;
         }
     }
 
