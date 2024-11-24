@@ -10,13 +10,16 @@ public class Netflix {
     private FileIO io;
     private ArrayList<Movies> moviesList;
     private ArrayList<Series> seriesList;
+    private UserHandler userHandler;
+    private String UserDataPath;
 
     public Netflix() {
-        ui = new TextUI();
+        ui = new TextUI(userHandler);
         this.io = new FileIO(); // Create an instance of FileIO
         this.users = new ArrayList<>();
         this.moviesList = io.readMovieData(); // Use instance method
-        this.seriesList = io.readSeries(); // Use instance method
+        this.seriesList = io.readSeries();// Use instance method
+        this.UserDataPath = "data/Userdata.csv";
     }
 
     public void printMovies() {
@@ -28,4 +31,9 @@ public class Netflix {
             }
         }
     }
-}
+
+
+
+
+
+    }

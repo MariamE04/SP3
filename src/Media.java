@@ -13,10 +13,6 @@ public abstract class Media {
         this.rating = rating;
     }
 
-    void play() {
-        // ui.displayMsg(ui.getCurrentMovie+"is playing now...")
-    }
-
     String getTitel(){
         return this.titel;
     }

@@ -25,7 +25,7 @@ public class UserHandler {
 
     public boolean createUser(String fullName, String username, String password) {
         boolean usernameTaken = false;
-        if(!isPasswordValid(password)){ //Validates the password using the isPasswordValid method.
+        if(!ValidPassword(password)){ //Validates the password using the isPasswordValid method.
             return false; //If the password is invalid, returns false.
         }
         for (User users : users) {
@@ -37,7 +37,7 @@ public class UserHandler {
         return true; //Returns true if the user is successfully created.
     }
 
-    public boolean isPasswordValid(String password) {
+    public boolean ValidPassword(String password) {
         //Checks if the password: is null, Has fewer than 6 characters, Exceeds 10 characters.
         if(password == null || password.length() <= 5 || password.length() >10){
             System.out.println("the password is not meeting conditons "); //Prints a message if the password is invalid + returns false.
