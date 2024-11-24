@@ -2,12 +2,27 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        FileIO fileIO = new FileIO();
-        ArrayList<Movies> moviesList = fileIO.readMovieData();
-        System.out.println("Movies List:");
-        // Print out movie details to verify data
-        for (Movies movie : moviesList) {
-            System.out.println(movie.getTitel() + movie.getCategories() +" (" + movie.getReleaseDate() + ") - Rating: " + movie.getRating());
+        UserHandler userHandler = new UserHandler("data/UserLogin.csv");
+        TextUI textUI = new TextUI(userHandler);
+        userHandler.loadUsers();
+        String userinput = textUI.getUserInput();
+
+        switch(userinput){
+            case "1":
+                textUI.UserLogin();
+                break;
+            case "2":
+                textUI.CreatAUser();
+
+                break;
+            default:
+                System.out.println("Goodbye");
         }
+        userHandler.saveUsers();
+        //Here we call the method to read the movie data so the user can pick the specific media they want.
+        FileIO fileIO = new FileIO();
+        MovieAndSeriesLab.movies = fileIO.readMovieData();
+        TextUI text = new TextUI(userHandler);
+        text.pickMedia(MovieAndSeriesLab.movies);
     }
 }

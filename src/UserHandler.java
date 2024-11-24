@@ -39,13 +39,12 @@ public class UserHandler {
 
     public boolean ValidPassword(String password) {
         //Checks if the password: is null, Has fewer than 6 characters, Exceeds 10 characters.
-        if(password == null || password.length() <= 5 || password.length() >10){
+        if (password == null || password.length() <= 5 || password.length() > 10) {
             System.out.println("the password is not meeting conditons "); //Prints a message if the password is invalid + returns false.
             return false;
-        }
-        else{
+        } else {
 
-            return true ; //Returns true for valid passwords
+            return true; //Returns true for valid passwords
         }
     }
 

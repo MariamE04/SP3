@@ -112,15 +112,17 @@ public class TextUI {
             return wannaWatch.get(movieNumberToWatch).getTitel();
         }
 
-    public void youHaveChosenMovie(){
-        System.out.println("\n");
-        System.out.println("You now have following choices: ");
-        System.out.println("Press 1 if you want to watch the movie ");
-        System.out.println("Press 2 if you want to save movies to your list");
-        Scanner scan1 = new Scanner(System.in);
-        int input = scan1.nextInt();
-        movieOption(input);
+    public void youHaveChosenMovie() {
+        Scanner scanner = new Scanner(System.in); // Ensure Scanner is properly set up
+        System.out.print("Enter your choice: ");
+        if (scanner.hasNextInt()) {
+            int choice = scanner.nextInt();
+            System.out.println("You selected: " + choice);
+        } else {
+            System.out.println("Invalid input. Please enter a valid number.");
         }
+    }
+
     public void movieOption(int input){
         Scanner scanner = new Scanner(System.in);
         if (input == 1) {

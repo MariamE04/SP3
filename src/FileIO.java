@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 public class FileIO {
 
-    private  ArrayList<Movies> moviesList = new ArrayList<>(); //A list to store Media objects representing movies.
+    private  ArrayList<Media> moviesList = new ArrayList<>(); //A list to store Media objects representing movies.
 
-    private  ArrayList<Series> seriesList = new ArrayList<>(); //A list to store Media objects representing TV series
+    private  ArrayList<Media> seriesList = new ArrayList<>(); //A list to store Media objects representing TV series
 
-    public  ArrayList<Movies> readMovieData() {
+    public  ArrayList<Media> readMovieData() {
         try (Scanner scan = new Scanner(new File("Data/film.txt"))){
             while (scan.hasNextLine()) {          //Reads each line in
                 String line = scan.nextLine();  // the file until the end.
@@ -35,7 +35,7 @@ public class FileIO {
         return moviesList;
     }
 
-    public  ArrayList<Series> readSeries() {
+    public  ArrayList<Media> readSeries() {
         try( Scanner scan = new Scanner(new File("Data/serier.txt"));) {
             while(scan.hasNextLine()){
                 String line = scan.nextLine();
