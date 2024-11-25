@@ -53,7 +53,7 @@ public class TextUI {
         String fullname = scan.nextLine();
         System.out.println("Please Creat a username");
         String username = scan.nextLine();
-        System.out.println("Please create a password (it should be between 5 and 9 characters)");
+        System.out.println("Please create a password");
         String password = scan.nextLine();
 
         if(userHandler.createUser(fullname, username, password)){
@@ -95,8 +95,6 @@ public class TextUI {
             youHaveChosenSeries();
 
         } else if (input == 3) {
-            System.out.println("You choose your watched list: ");
-        }  else if (input == 4) {
             System.out.println("You choose your saved list: ");
         }
     }
@@ -113,7 +111,6 @@ public class TextUI {
             System.out.println("1: Play the movie");
             System.out.println("2: Save the movie to your list");
             System.out.println("Enter your choice: ");
-
             int option = scan.nextInt();
             movieOption(option);
 
@@ -208,7 +205,6 @@ public class TextUI {
         if (scan.hasNextInt()) { // Brug samme Scanner
             int choice = scan.nextInt();
             System.out.println("You selected: " + choice);
-            scan.nextLine();
         } else {
             System.out.println("Invalid input. Please enter a valid number.");
             scan.nextLine(); // Ryd input-bufferen

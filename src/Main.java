@@ -1,7 +1,3 @@
-import static java.awt.SystemColor.text;
-
-import java.io.FileWriter;
-
 public class Main {
     public static void main(String[] args) {
         UserHandler userHandler = new UserHandler("data/UserLogin.csv");
@@ -15,11 +11,12 @@ public class Main {
                 break;
             case "2":
                 textUI.CreatAUser();
+                userHandler.saveUsers();
                 break;
             default:
                 System.out.println("Goodbye");
         }
-        userHandler.saveUsers();
+
         //Here we call the method to read the movie data so the user can pick the specific media they want.
         FileIO fileIO = new FileIO();
 
