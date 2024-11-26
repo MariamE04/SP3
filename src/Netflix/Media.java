@@ -1,3 +1,5 @@
+package Netflix;
+
 import java.util.ArrayList;
 
 public abstract class Media {
@@ -11,6 +13,7 @@ public abstract class Media {
         this.releaseDate = releaseDate;
         this.categories = categories;
         this.rating = rating;
+
     }
 
     String getTitel(){
@@ -28,5 +31,6 @@ public abstract class Media {
     ArrayList<String> getCategory(){
         return this.categories;
     }
+
 
 }

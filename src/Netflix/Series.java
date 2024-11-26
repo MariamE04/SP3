@@ -1,6 +1,8 @@
+package Netflix;
+
 import java.util.ArrayList;
 
-public class Series extends Media{
+public class Series extends Media {
     private ArrayList<String> episodesPerSeason;
 
     Series(String titel, int releaseDate, ArrayList<String> categories, double rating, ArrayList<String> episodesPerSeason) {
@@ -34,12 +36,6 @@ public class Series extends Media{
 
     @Override
     public String toString() {
-        return "Series{" +
-                "episodesPerSeason=" + episodesPerSeason +
-                ", titel='" + titel + '\'' +
-                ", rating=" + rating +
-                ", releaseDate=" + releaseDate +
-                ", categories=" + categories +
-                '}';
+        return titel + " - " + releaseDate + " - " + categories + " - " + rating + " - " + episodesPerSeason;
     }
 }
