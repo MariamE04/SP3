@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ public class TextUI {
             System.out.println("\n\n");
         } else {
             int passwordAttempts = 0; //initialized to 0 to track the number of failed login attempts.
-            while(passwordAttempts < 4){ //his allows the user up to four additional login attempts.
+            while(passwordAttempts < 3){ //his allows the user up to four additional login attempts.
                 System.out.println("Your password or username is incorect please try again");
                 System.out.println("Please enter your username");
                 username = scan.nextLine();
@@ -56,9 +58,9 @@ public class TextUI {
         System.out.println("Please create a password");
         String password = scan.nextLine();
 
-        if(userHandler.createUser(fullname, username, password)){
+        if(userHandler.createUser(username, password, fullname)){
             userHandler.saveUsers();
-            System.out.println("Welcome to Chills  " + username);
+            System.out.println("Welcome to Netflix  " + username);
             System.out.println("\n\n");
         } else{
             System.out.println("Invalid username or password. Please log in or sign up.");
@@ -73,14 +75,14 @@ public class TextUI {
         Scanner scan = new Scanner(System.in);
         System.out.println("1-Movies");
         System.out.println("2-Series");
-        System.out.println("3-watched movies");
-        System.out.println("4-saved movies");
+        System.out.println("3-saved movies");
+        System.out.println("4-saved series");
         int input = scan.nextInt();
         scan.nextLine();
         if (input == 1) {
             System.out.println("You choose movies, here's some options");
             for (int i = 0; i < medias.size(); i++) {
-                String movies = i + " - " + medias.get(i).getTitel();
+                String movies = i + " - " + medias.get(i).getTitel() + "-" + medias.get(i).getReleaseDate() + "-" + medias.get(i).getRating();
                 System.out.println(movies);
             }
             chooseMovie();
@@ -94,8 +96,37 @@ public class TextUI {
             chooseSeries();
             youHaveChosenSeries();
 
-        } else if (input == 3) {
-            System.out.println("You choose your saved list: ");
+        }  else if (input == 3) {
+            System.out.println("You choose your saved movie list: ");
+            try {
+                File file = new File("SP3/Data/SavedMoviesList.csv");
+                Scanner scanner = new Scanner(file);
+                while (scanner.hasNextLine()) {
+                    String data = scanner.nextLine();
+                    System.out.println(data);
+                }
+                scanner.close();
+
+            } catch (FileNotFoundException e){
+                System.out.println("An error occurred.");
+                //e.printStackTrace();
+            }
+        }
+        else if (input == 4) {
+            System.out.println("You choose your saved series list: ");
+            try {
+                File file = new File("SP3/Data/SavedSeriesList.csv");
+                Scanner scanner = new Scanner(file);
+                while (scanner.hasNextLine()) {
+                    String data = scanner.nextLine();
+                    System.out.println(data);
+                }
+                scanner.close();
+
+            } catch (FileNotFoundException e){
+                System.out.println("An error occurred.");
+                //e.printStackTrace();
+            }
         }
     }
 
@@ -146,7 +177,7 @@ public class TextUI {
             System.out.println("Enter the name of the movie you want to save: ");
             String movieName = scanner.nextLine();
             try {
-                FileWriter csvWriter = new FileWriter("data/SavedMoviesList.csv", true);
+                FileWriter csvWriter = new FileWriter("SP3/data/SavedMoviesList.csv", true);
                 csvWriter.append(movieName);
                 csvWriter.append("\n");
                 csvWriter.flush();
@@ -175,6 +206,7 @@ public class TextUI {
             System.out.println("Enter your choice: ");
 
             int option = scan.nextInt();
+            scan.nextLine();
             seriesOption(option); // Kalder metoden her
 
         } catch (Exception e) {
@@ -191,7 +223,7 @@ public class TextUI {
         } else if (input == 2) {
             System.out.println("Enter the name of the series you want to save: ");
             String seriesName = scanner.nextLine();
-            try (FileWriter csvWriter = new FileWriter("data/SavedSeriesList.csv", true)) {
+            try (FileWriter csvWriter = new FileWriter("SP3/data/SavedSeriesList.csv", true)) {
                 csvWriter.append(seriesName).append("\n");
                 System.out.println("The series has been added to your list.");
             } catch (IOException e) {
