@@ -71,26 +71,25 @@ public class TextUI {
             System.out.println("Failed to create user. Please try again.");
         }
     }
-
-    private void showMediaMenu() {
+    public void showMediaMenu() {
         System.out.println("Choose an option:");
         System.out.println("1: Movies");
         System.out.println("2: Series");
-        System.out.println("3: Saved movies");
-        System.out.println("4: Saved series");
+        System.out.println("3: Saved Movies");
+        System.out.println("4: Saved Series");
 
         String choice = scan.nextLine();
-        switch (choice) {
+        switch (choice) { //For film: Kalder movieHandler.showMovies() og movieHandler.chooseMovie().
             case "1" -> {
                 movieHandler.showMovies();
                 movieHandler.chooseMovie();  // Call chooseMovie() after showing movies
             }
-            case "2" -> {
+            case "2" -> { //For serier: Kalder seriesHandler.showSeries() og seriesHandler.chooseSeries().
                 seriesHandler.showSeries();      // Viser serierne
                 seriesHandler.chooseSeries();    // Giver brugeren mulighed for at vælge og handle på en serie
             }
-            case "3" -> movieHandler.showSavedMovies();
-            case "4" -> seriesHandler.showSavedSeries();
+            case "3" -> movieHandler.showSavedSeries(); //For gemte medier: Viser enten gemte film eller serier.
+            case "4" -> seriesHandler.showSavedSeries(); //For andet input: Informerer om ugyldigt valg.
             default -> System.out.println("Invalid input. Please try again.");
         }
     }
