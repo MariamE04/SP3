@@ -8,21 +8,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SeriesHandler {
-    private ArrayList<Media> series;
-    private Scanner scan;
-    private TextUI textUI;
+    private ArrayList<Media> series; //En liste over serier. Hver serie er repræsenteret som et Media-objekt.
+    private Scanner scan; // Bruges til at læse input fra brugeren.
+    private Netflix netflix;
 
-    public SeriesHandler(ArrayList<Media> series) {
-        this.series = series;
-        this.scan = new Scanner(System.in);
+    public SeriesHandler(ArrayList<Media> series) { //
+        this.series = series; //Initialiserer listen over serier (series), så klassen ved, hvilke serier den skal arbejde med.
+        this.scan = new Scanner(System.in); //Opretter en Scanner til at håndtere brugerinput
     }
 
     public void showSeries() {
-        if (series.isEmpty()) {
+        if (series.isEmpty()) { //Hvis listen over serier (series) er tom, udskrives beskeden: "No series available."
             System.out.println("No series available.");
         } else {
             System.out.println("Available Series:");
-            for (int i = 0; i < series.size(); i++) {
+            for (int i = 0; i < series.size(); i++) { //Itererer gennem listen over serier.
                 Media serie = series.get(i);
                 // Nummeret i listen starter fra 1 (i + 1)
                 System.out.println((i + 1) + serie.toString());
@@ -76,7 +76,7 @@ public class SeriesHandler {
                     }
                     break;
                 case 2:
-                    textUI.showMediaMenu(); // Go back to the main menu
+                    netflix.showMediaMenu(); // Go back to the main menu
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -89,31 +89,24 @@ public class SeriesHandler {
         }
     }
 
-    /*public void displaySeries() {
-        System.out.println("You chose series, here's some options:");
-        for (int i = 0; i < series.size(); i++) {
-            String seriesDetails = i + " - " + series.get(i).getTitel() + " - "
-                    + series.get(i).getReleaseDate() + " - "
-                    + series.get(i).getCategory() + " - "
-                    + series.get(i).getRating();
-            System.out.println(seriesDetails);
-        }
-    }*/
 
+    //Denne metode lader brugeren vælge en serie og beslutte, hvad der skal ske med den.
     public void chooseSeries() {
+        //Udskriver en besked, der beder brugeren vælge en serie ved at indtaste nummeret.
         System.out.println("\nPlease press the number of the series you want to watch:");
         try {
-            int seriesNumberToWatch = scan.nextInt();
+            int seriesNumberToWatch = scan.nextInt(); //Finder serien baseret på brugerens valg.
             scan.nextLine(); // Clear buffer
-            System.out.println("You have chosen: " + series.get(seriesNumberToWatch).getTitel());
+            System.out.println("You have chosen: " + series.get(seriesNumberToWatch).getTitel()); //Udskriver serien, som brugeren har valgt.
 
+            //Præsenterer to muligheder
             System.out.println("What would you like to do?");
             System.out.println("1: Play the series");
             System.out.println("2: Save the series to your list");
             System.out.println("Enter your choice:");
             int option = scan.nextInt();
             scan.nextLine();
-            seriesOption(option);
+            seriesOption(option); //Læser brugerens valg og kalder seriesOption() med valget.
 
         } catch (Exception e) {
             System.out.println("Invalid input. Please enter a valid number.");
@@ -122,19 +115,21 @@ public class SeriesHandler {
         }
     }
 
+    //Denne metode håndterer brugerens valg fra chooseSeries().
     public void seriesOption(int input) {
-        if (input == 1) {
+        if (input == 1) { //Hvis brugeren vælger 1 (afspil serien)
             System.out.println("The series is now playing.");
-        } else if (input == 2) {
-            System.out.println("Enter the name of the series you want to save:");
+        } else if (input == 2) { //Hvis brugeren vælger 2 (gem serien)
+            System.out.println("Enter the name of the series you want to save:"); //Beder brugeren om at indtaste seriens navn
             String seriesName = scan.nextLine();
+            //Tilføjer seriens navn til filen SP3/data/SavedSeriesList.csv ved hjælp af FileWriter
             try (FileWriter csvWriter = new FileWriter("Data/SavedSeriesList.csv", true)) {
-                csvWriter.append(seriesName).append("\n");
+                csvWriter.append(seriesName).append("\n"); //Bekræfter, at serien er blevet gemt.
                 System.out.println("The series has been added to your list.");
             } catch (IOException e) {
                 System.out.println("Error saving series: " + e.getMessage());
             }
-        } else {
+        } else { //Udskriver en fejlmeddelelse: "Option does not exist."
             System.out.println("Option does not exist, please choose the available options.");
         }
     }

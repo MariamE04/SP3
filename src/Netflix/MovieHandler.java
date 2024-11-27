@@ -7,64 +7,91 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//Denne klasse håndterer film i Netflix-projektet. Den administrerer filmlisten, viser tilgængelige film,
+// giver brugeren mulighed for at vælge film, og gemmer valgte film.
+
+
 public class MovieHandler {
-    private ArrayList<Media> movies;
-    private Scanner scan;
+    private ArrayList<Media> movies; //En liste over film. Hver film er repræsenteret som et Media-objekt.
+    private Scanner scan; //Bruges til at læse input fra brugeren.
+    private Netflix netflix;
 
     public MovieHandler(ArrayList<Media> movies) {
-        this.movies = movies;
-        this.scan = new Scanner(System.in);
+        this.movies = movies; //Initialiserer listen over film (movies), så klassen ved, hvilke film den skal arbejde med.
+        this.scan = new Scanner(System.in); //Opretter en Scanner til at håndtere brugerinput.
     }
 
+    //formål: Viser en liste over tilgængelige film.
     public void showMovies() {
-        if (movies.isEmpty()) {
+        if (movies.isEmpty()) { //Hvis listen movies er tom, vises en besked: "No movies available."
             System.out.println("No movies available.");
-        } else {
-            System.out.println("Available Netflix.Movies:");
+        } else { //Ellers udskrives alle film med deres detaljer (bruges toString fra Media).
+            System.out.println("Available Movies:");
             for (int i = 0; i < movies.size(); i++) {
                 Media movie = movies.get(i);
-                System.out.println((i + 1) + ": " + movie.getTitel() + " - " + movie.getReleaseDate() + " - " + movie.getCategory() + " - " + movie.getRating());
+                System.out.println((i + 1) + movie.toString());
             }
         }
     }
 
-    public void showSavedMovies() {
-        System.out.println("Saved Movies:");
-        try (BufferedReader reader = new BufferedReader(new FileReader("Data/SavedMoviesList.csv"))) {
+    //Formål: Viser en liste over gemte serier fra en fil.
+    public void showSavedSeries() {
+        System.out.println("Saved Series:");
+        //Læser filen SavedSeriesList.csv linje for linje og udskriver dens indhold.
+        try (BufferedReader reader = new BufferedReader(new FileReader("Data/SavedSeriesList.csv"))) { //
             String line;
             while ((line = reader.readLine()) != null) {
-                System.out.println(line); // Antager at hver linje er en gemt film
+                System.out.println(line); // Antager at hver linje er en gemt serie
             }
-        } catch (IOException e) {
-            System.out.println("Error loading saved movies: " + e.getMessage());
+            showPlayOrBackMenu(); // Efter visning af gemte serier, vis muligheder (kalder på metoden)
+        } catch (IOException e) { //Hvis der opstår en fejl ved læsning, vises en fejlbesked.
+            System.out.println("Error loading saved series: " + e.getMessage());
         }
     }
 
-    public void displayMovies() {
-        System.out.println("You chose movies, here's some options:");
-        for (int i = 0; i < movies.size(); i++) {
-            String movieDetails = i + " - " + movies.get(i).getTitel() + " - "
-                    + movies.get(i).getReleaseDate() + " - "
-                    + movies.get(i).getCategory() + " - "
-                    + movies.get(i).getRating();
-            System.out.println(movieDetails);
+    //Formål: Viser en menu, hvor brugeren kan vælge at spille en
+    // serie eller gå tilbage til hovedmenuen.
+    public void showPlayOrBackMenu() {
+        System.out.println("Choose an option:");
+        System.out.println("1: Play the series");
+        System.out.println("2: Back to menu");
+        int choice = scan.nextInt();
+        scan.nextLine(); // Clear buffer
+
+        switch (choice) {
+            case 1:
+                //Spørger om serienummeret og udskriver en besked om, at serien spilles.
+                System.out.println("Enter the number of the series you want to play:");
+                int seriesChoice = scan.nextInt();
+                // Kald metoden til at spille serien
+                System.out.println("Playing series: " + seriesChoice);
+                break;
+            case 2:
+                netflix.showMediaMenu(); // Gå tilbage til menuen
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+                showPlayOrBackMenu(); // Vis menuen igen
         }
     }
 
+    //Formål: Giver brugeren mulighed for at vælge en film og vælge en handling.
     public void chooseMovie() {
+        //Spørger brugeren om filmens nummer.
         System.out.println("\nPlease press the number of the movie you want to watch:");
         try {
             int movieNumberToWatch = scan.nextInt();
             scan.nextLine(); // Clear buffer
             System.out.println("You have chosen: " + movies.get(movieNumberToWatch).getTitel());
 
+            //Viser valgmuligheder for at afspille filmen eller gemme den.
             System.out.println("What would you like to do?");
             System.out.println("1: Play the movie");
             System.out.println("2: Save the movie to your list");
             System.out.println("Enter your choice:");
             int option = scan.nextInt();
             scan.nextLine();
-            movieOption(option);
+            movieOption(option); //kalder på metoden som (spil eller gem film)
 
         } catch (Exception e) {
             System.out.println("Invalid input. Please enter a valid number.");
@@ -73,10 +100,11 @@ public class MovieHandler {
         }
     }
 
+    //Formål: Behandler brugerens valg i chooseMovie().
     public void movieOption(int input) {
-        if (input == 1) {
+        if (input == 1) { //Udskriver en besked om, at filmen nu afspilles.
             System.out.println("The movie is now playing.");
-        } else if (input == 2) {
+        } else if (input == 2) {  //Beder brugeren om filmens navn og gemmer det i SavedMoviesList.csv.
             System.out.println("Enter the name of the movie you want to save:");
             String movieName = scan.nextLine();
             try (FileWriter csvWriter = new FileWriter("Data/SavedMoviesList.csv", true)) {
@@ -90,3 +118,8 @@ public class MovieHandler {
         }
     }
 }
+
+//Kort opsummering
+//Klassen håndterer visning og valg af film samt gemning af valgte film i en fil.
+//Den bruger TextUI-klassen til at vende tilbage til hovedmenuen og interagerer med brugeren via en Scanner.
+//Fejl håndteres løbende, fx ved ugyldigt input eller problemer med filadgang.
