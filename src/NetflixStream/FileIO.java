@@ -1,4 +1,4 @@
-package Netflix;
+package NetflixStream;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,8 +28,8 @@ public class FileIO {
                 double movieRating = Double.parseDouble(lineData[3].trim().replace(',', '.')); //Replace ',' with '.' for proper parsing
                 // Convert string to double
 
-                Movies movie = new Movies(movieName, movieYear, movieCategories, movieRating); //Constructs a Netflix.Movies object using the name, year, and rating.
-                moviesList.add(movie); //Adds the Netflix.Movies object to the movies list.
+                Movies movie = new Movies(movieName, movieYear, movieCategories, movieRating); //Constructs a NetflixStream.Movies object using the name, year, and rating.
+                moviesList.add(movie); //Adds the NetflixStream.Movies object to the movies list.
             }
         } catch(FileNotFoundException e){
             System.out.println("File not found: " + e.getMessage());
